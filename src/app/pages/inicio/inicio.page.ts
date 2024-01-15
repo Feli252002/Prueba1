@@ -15,7 +15,7 @@ export class InicioPage implements OnInit {
   }
 
   field:string;
-  constructor(public toastController:ToastController, public router:Router) { }
+  constructor(public toastController:ToastController, private router:Router) { }
 
   ngOnInit() {
   }

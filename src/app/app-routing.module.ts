@@ -16,12 +16,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {
-    path: 'agregar-viaje',
-    loadChildren: () => import('./pages/agregar-viaje/agregar-viaje.module').then( m => m.AgregarViajePageModule)
-  },
-  {
     path: 'recuperar-clave',
     loadChildren: () => import('./pages/recuperar-clave/recuperar-clave.module').then( m => m.RecuperarClavePageModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./pages/page404/page404.module').then( m => m.Page404PageModule)
   },
 ];
 

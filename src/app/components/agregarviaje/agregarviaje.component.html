@@ -1,0 +1,78 @@
+<br><br><br>
+<!---<ion-content>
+  <ion-card>
+    <ion-card-content>
+  
+        <ion-item class="ion-padding-horizontal">
+          <ion-label position="stacked" class="ion-padding-bottom">Región</ion-label>
+          <ion-select placeholder="Seleccione region" [(ngModel)]="viajes.zona">
+            <ion-select-option *ngFor="let reg of regiones" [value]="reg.id">{{reg.region}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <br>
+        <ion-item class="ion-padding-horizontal">
+          <ion-label position="stacked" class="ion-padding-bottom">Comuna</ion-label>
+          <ion-select placeholder="Seleccione comuna" [(ngModel)]="viajes.municipio">
+            <ion-select-option *ngFor="let com of comunas" [value]="com.id">{{com.comuna}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input min="1" max="10" helperText="Ingrese cantidad de pasajeros" errorText="Pasajeros maximo superado" labelPlacement="floating" type="number" [(ngModel)]="viajes.capacidad" ></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Hora de salida</ion-label>
+          <ion-input type="number" [(ngModel)]="viajes.salida"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Precio</ion-label>
+          <ion-input type="number" [(ngModel)]="viajes.precio"></ion-input>
+        </ion-item>
+        <br>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" (click)="agregar()">Agregar viaje</ion-button>
+          </ion-col>
+        </ion-row>
+        <br>
+    </ion-card-content>
+  </ion-card>  
+</ion-content>
+--->
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-list lines="full">
+        <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+          <ion-item>
+            <ion-label class="form-label" position="floating">region</ion-label>
+            <ion-input type="text" class="form-control" formControlName="region" requerid></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="form-label" position="floating">comuna</ion-label>
+            <ion-input type="text" class="form-control" formControlName="comuna" requerid></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="form-label" position="floating">Capacidad</ion-label>
+            <ion-input type="number" class="form-control" formControlName="capacidad" requerid></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="form-label" position="floating">Salida</ion-label>
+            <ion-input type="number" class="form-control" formControlName="salida" requerid></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label class="form-label" position="floating">Precio</ion-label>
+            <ion-input  type="number" class="form-control" formControlName="precio" requerid></ion-input>
+          </ion-item>
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" color="primary" shape="full" expand="block" >Agregar viaje</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

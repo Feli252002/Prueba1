@@ -1,0 +1,44 @@
+#cuenta{
+  text-align: center;
+  padding-bottom: 30px;
+}
+#img{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%; 
+}
+p{
+  color: #1A1A1A;
+  padding-top: 10px;
+  font-size: large;
+}
+a{
+  color: #1A1A1A;
+  text-decoration: none;
+}
+
+.boton{
+  color: #1A1A1A;
+  border-radius: 20px;
+}
+.nombreAPP{
+  color: #1A1A1A;
+}
+ion-card{
+  background-color: #FFB800;
+  color: #1A1A1A;
+  box-shadow: 0px 0px 30px #666666;
+}
+
+ion-card-subtitle{
+  color: #1A1A1A;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
