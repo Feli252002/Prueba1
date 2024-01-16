@@ -1,5 +1,4 @@
 import { Injectable, inject } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Firestore, collection, addDoc, collectionData, doc, deleteDoc } from '@angular/fire/firestore';
 import { Viajes } from '../interfaces/viajes';
 import { Observable } from 'rxjs';
@@ -9,20 +8,20 @@ import { Observable } from 'rxjs';
 })
 export class FirebaseService {
 
-  constructor(private firestore:Firestore){}
+  constructor(private fbstore:Firestore){}
 
   AgregarViaje(Viajes: Viajes){
-    const viajeRef = collection(this.firestore, 'viajes');
+    const viajeRef = collection(this.fbstore, 'viajes');
     return addDoc(viajeRef, Viajes);
   }
 
   VerViaje(): Observable<Viajes[]>{
-    const viajeRef = collection(this.firestore, 'viajes');
-    return collectionData(viajeRef, {idField: 'vID'}) as Observable<Viajes[]>;
+    const viajeRef = collection(this.fbstore, 'viajes');
+    return collectionData(viajeRef, {idField: 'vid'}) as Observable<Viajes[]>;
   }
 
   EliminarViaje(viajes: Viajes){
-    const viajeDocRef = doc(this.firestore, `viajes/${viajes.vID}`);
+    const viajeDocRef = doc(this.fbstore, `viajes/${viajes.vid}`);
     return deleteDoc(viajeDocRef);
   }
 }

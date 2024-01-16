@@ -1,5 +1,5 @@
 export interface Viajes {
-    vID?: string;
+    vid?: string;
     region: string;
     comuna: string;
     capacidad: number;
