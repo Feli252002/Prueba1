@@ -2,11 +2,15 @@ import { Injectable, inject } from '@angular/core';
 import { Firestore, collection, addDoc, collectionData, doc, deleteDoc } from '@angular/fire/firestore';
 import { Viajes } from '../interfaces/viajes';
 import { Observable } from 'rxjs';
+import { User } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
+  signIn(arg0: User) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private fbstore:Firestore){}
 

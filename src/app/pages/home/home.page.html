@@ -17,7 +17,7 @@
       <div id="cuenta">
           <ion-label>
             <img id="img" src="assets/img/perfil.jpg" alt="">
-            <p *ngIf="user">{{user.usuario}}</p>
+            <p *ngIf="user">{{user.name}}</p>
           </ion-label>
         </div>     
       <ion-item>
@@ -34,7 +34,7 @@
       </ion-item>
       <ion-item>
         <ion-icon name="exit-outline" slot="start"></ion-icon>
-        <ion-label><a [routerLink]="['/inicio']">Cerrar Sesión</a></ion-label>
+        <ion-label><a (click)="signOut()">Cerrar Sesión</a></ion-label>
       </ion-item>
     </ion-list> 
   </ion-content>
@@ -50,12 +50,13 @@
 
 <div class="ion-page" id="main-content">
 
-    <ion-router-outlet>
-      <!---CONTENIDO DE LOS COMPONENTES---->
-    </ion-router-outlet>
+
+  <ion-router-outlet>
+    <!--CONTENIDO DE LOS COMPONENTES-->
+  </ion-router-outlet>
 
   <ion-tabs>
-    <ion-tab-bar slot="bottom" (ionChange)="segmentChanged($event)">
+    <ion-tab-bar (ionChange)="segmentChanged($event)">
       <ion-tab-button tab="ver">
         <ion-icon name="car-outline"></ion-icon>
         Viajes
@@ -70,5 +71,4 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
-
-</div>   
+</div>

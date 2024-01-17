@@ -1,10 +1,9 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-card>
     <ion-grid>
       <ion-row>
@@ -16,29 +15,29 @@
       </ion-row>
     </ion-grid>
     <ion-card-header>
-      <ion-card-title>Recuperar contraseña</ion-card-title>    
+      <ion-card-title>Inicio de Sesión</ion-card-title>    
     </ion-card-header>
   
-    <ion-card-content>
-      <ion-item>
-        
-        <ion-input type="email" fill="solid" label="Email"
-          labelPlacement="floating" helperText="Enter a valid email" 
-          errorText="Invalid email" ngModelemail></ion-input>
-      </ion-item>
-      <h2><a [routerLink]="['/inicio']">Iniciar sesión</a></h2>
-      <ion-row>
-        <ion-col>
-          <ion-button id="present-alert" expand="block" [routerLink]="['/inicio']">Recuperar</ion-button>
-          <ion-alert
-            trigger="present-alert"
-            class="custom-alert"
-            header="Correo enviado correctamente"
-            [buttons]="alertButtons"
-          ></ion-alert>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
+    <form [formGroup]="formrecovery" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()" novalidate>
+      <ion-card-content>
+        <ion-item>
+          <ion-label class="form-label" position="floating">Email</ion-label>
+          <ion-input type="text" class="form-control" formControlName="email" requerid></ion-input>
+        </ion-item>
+        <div *ngIf="formrecovery.get('email')?.hasError('required') && formrecovery.get('email')?.touched">
+          Ingrese un email
+        </div>
+        <br>
+        <p [routerLink]="['/inicio']" class="ion-text-end">Iniciar sesión</p>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" class="submit" type="submit">
+              Recuperar
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </form>
   </ion-card>
 </ion-content>
-a

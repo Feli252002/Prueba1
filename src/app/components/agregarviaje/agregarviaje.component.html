@@ -1,54 +1,63 @@
-<br><br><br>
 <ion-content>
-  <ion-card>
+<br><br><br>
+<ion-card>
     <ion-card-content>
       <ion-list lines="full">
-        <form [formGroup]="formulario" (ngSubmit)="onSubmit()"  novalidate>
+        <form novalidate>
           <ion-item>
             <ion-label class="form-label" position="floating">region</ion-label>
             <ion-input type="text" class="form-control" formControlName="region" requerid></ion-input>
           </ion-item>
-          <div *ngIf="formulario.get('region')?.hasError('required') && formulario.get('region')?.touched">
+          <div>
+            <!--- va dentro del div: *ngIf="formulario.get('region')?.hasError('required') && formulario.get('region')?.touched"-->
             Ingrese un dato valido
           </div>
           <ion-item>
             <ion-label class="form-label" position="floating">comuna</ion-label>
             <ion-input type="text" class="form-control" formControlName="comuna" requerid></ion-input>
           </ion-item>
-          <div *ngIf="formulario.get('comuna')?.hasError('required') && formulario.get('comuna')?.touched">
+          <div>
+            <!--- va dentro del div: *ngIf="formulario.get('comuna')?.hasError('required') && formulario.get('comuna')?.touched"-->
             Ingrese un dato valido
           </div>
           <ion-item>
             <ion-label class="form-label" position="floating">Capacidad</ion-label>
             <ion-input type="number" class="form-control" formControlName="capacidad" requerid></ion-input>
           </ion-item>
-          <div *ngIf="formulario.get('capacidad')?.hasError('required') && formulario.get('capacidad')?.touched">
+          <div>
+            <!--- va dentro del div: *ngIf="formulario.get('capacidad')?.hasError('required') && formulario.get('capacidad')?.touched"-->
             Ingrese capacidad minima
           </div>
-          <div *ngIf="formulario.get('capacidad')?.hasError('min') && formulario.get('capacidad')?.touched">
+          <div>
+            <!--- va dentro del div: *ngIf="formulario.get('capacidad')?.hasError('min') && formulario.get('capacidad')?.touched"-->
             La capacidad no puede ser menor a 1
           </div>
-          <div *ngIf="formulario.get('capacidad')?.hasError('max') && formulario.get('capacidad')?.touched">
+          <div>
+            <!--- va dentro del div: *ngIf="formulario.get('capacidad')?.hasError('max') && formulario.get('capacidad')?.touched"-->
             La capacidad no puede ser mayor a 10
           </div>
           <ion-item>
             <ion-label class="form-label" position="floating">Salida</ion-label>
             <ion-input type="number" class="form-control" formControlName="salida" requerid></ion-input>
           </ion-item>
-          <div *ngIf="formulario.get('salida')?.hasError('required') && formulario.get('salida')?.touched">
+          <div>
+            <!--- va dentro del div: *ngIf="formulario.get('salida')?.hasError('required') && formulario.get('salida')?.touched"-->
             Ingrese un precio
           </div>
-          <div *ngIf="formulario.get('salida')?.hasError('min') && formulario.get('salida')?.touched">
+          <div>
+            <!--- va dentro del div: *ngIf="formulario.get('salida')?.hasError('min') && formulario.get('salida')?.touched"-->
             El precio debe tener un minimo de $500
           </div>
           <ion-item>
             <ion-label class="form-label" position="floating">Precio</ion-label>
             <ion-input  type="number" class="form-control" formControlName="precio" requerid></ion-input>
           </ion-item>
-          <div *ngIf="formulario.get('precio')?.hasError('required') && formulario.get('precio')?.touched">
+          <div>
+            <!--- va dentro del div: *ngIf="formulario.get('precio')?.hasError('required') && formulario.get('precio')?.touched"-->
             Ingrese un precio
           </div>
-          <div *ngIf="formulario.get('precio')?.hasError('min') && formulario.get('precio')?.touched">
+          <div>
+            <!--- va dentro del div: *ngIf="formulario.get('precio')?.hasError('min') && formulario.get('precio')?.touched"-->
             El precio debe tener un minimo de $500
           </div>
           <ion-row>

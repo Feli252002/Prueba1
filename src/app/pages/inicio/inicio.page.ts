@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { Component, OnInit, inject } from '@angular/core';
+import { DocumentData } from '@angular/fire/compat/firestore';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Usuarios } from 'src/app/interfaces/usuarios';
+import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-inicio',
@@ -9,51 +12,70 @@ import { ToastController } from '@ionic/angular';
 })
 export class InicioPage implements OnInit {
 
-  user={
-    usuario:"",
-    contrasena:""
-  }
+  firebaseSvc = inject(FirebaseauthService);
+  utilsSvc = inject(UtilsService);
 
-  field:string;
-  constructor(public toastController:ToastController, private router:Router) { }
+  formlogin = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
+  })
+
 
   ngOnInit() {
   }
-  
-  ingresar(){
-    console.log(this.user);
-    if (this.validateModel(this.user)) {
-      this.presentToast('bottom','Bienvenido '+this.user.usuario);
-      let navigationextras: NavigationExtras={
-        state:{
-          user: this.user
+
+  async submit() {
+    if (this.formlogin.valid) {
+      const loading = await this.utilsSvc.loading();
+      await loading.present();
+      this.firebaseSvc.signIn(this.formlogin.value as Usuarios).then(res => {
+        this.getUserInfo(res.user.uid);
+      }).catch(error => {
+        console.log(error);
+        this.utilsSvc.presentToast({
+          message: 'Correo/usuario o contraseña incorrectas',
+          duration: 2000,
+          position: 'bottom',
+          icon: 'alert-circle-outline'
+        })
+      }).finally(() => {
+        loading.dismiss();
+      })
+    }
+  }
+
+  async getUserInfo(uid: string) {
+    if (this.formlogin.valid) {
+      const loading = await this.utilsSvc.loading();
+      await loading.present();
+
+      let path = `Usuarios/${uid}`;
+
+      this.firebaseSvc.getDocument(path).then((userData: DocumentData | undefined) => {
+        if (userData){
+          const user = userData as Usuarios;
+          this.utilsSvc.saveInLocalStorage('Usuarios', user);
+          this.utilsSvc.routerLink('/home');
+          this.formlogin.reset();
+
+          this.utilsSvc.presentToast({
+            message: `Bienvenido ${user.name}`,
+            duration: 1500,
+            position: 'bottom',
+            icon: 'person-circle-outline'
+          })
         }
-      }
-      this.router.navigate(['/home'],navigationextras);
-    }else{
-      this.presentToast('bottom','Falta: '+this.field, 3000)
+      }).catch(error => {
+        this.utilsSvc.presentToast({
+          message: error.message,
+          duration: 2000,
+          position: 'bottom',
+          icon: 'alert-circle-outline'
+        })
+      }).finally(() =>{
+        loading.dismiss();
+      })
+
     }
-  }
-
-  validateModel(model:any){
-    for(var [key, value] of Object.entries(model)){
-      if (value=="") {
-        this.field=key
-        return false;
-      }      
-    }
-    return true;
-  }
-
-  async presentToast(position: 'top' | 'middle' | 'bottom',
-                     message: string,
-                     duration?:number) {
-    const toast = await this.toastController.create({
-      message: message,
-      duration: duration?duration:2500,
-      position: position,
-    });
-
-    await toast.present();
   }
 }

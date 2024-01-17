@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DocumentData } from '@firebase/firestore';
+import { AgregarviajeComponent } from 'src/app/components/agregarviaje/agregarviaje.component';
+import { Usuarios } from 'src/app/interfaces/usuarios';
+import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-home',
@@ -8,17 +13,34 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomePage {
 
-  user: any;
+  user: Usuarios;
+
+  firebaseSvc = inject(FirebaseauthService);
+  utilsSvc = inject(UtilsService);
+
+  signOut(){
+    this.firebaseSvc.signOut();
+  }
+
+  addViaje(){
+    this.utilsSvc.presentModal({
+      component: AgregarviajeComponent
+    })
+  }
+  
+  getUserInfo(uid: string) {
+    let path = `Usuarios/${uid}`;
+
+      this.firebaseSvc.getDocument(path).then((userData: DocumentData | undefined) => {
+        if (userData){
+          const user = userData as Usuarios;
+          this.utilsSvc.saveInLocalStorage('Usuarios', user);
+        }
+      })
+  }
 
   constructor(public activatedRoute: ActivatedRoute,
     private router: Router) {
-    this.activatedRoute.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation()?.extras.state) {
-        this.user = this.router.getCurrentNavigation()?.extras.state?.["user"];
-      } else {
-        this.router.navigate(["/login"]);
-      }
-    });
   }
 
   segmentChanged($event: any) {
